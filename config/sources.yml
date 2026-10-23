@@ -1,0 +1,103 @@
+sources:
+  - key: running_life
+    name: Running Life
+    start_urls: ["https://running.life/calendario-corridas/brasil"]
+    allowed_domains: ["running.life"]
+    listing_patterns: ["/calendario-corridas/brasil(?:/[^?]*)?(?:\\?.*)?$"]
+    detail_patterns: ["/pt/event/"]
+    render: http
+    max_discovery_pages: 180
+    delay_seconds: 1.5
+
+  - key: corridasbr
+    name: Corridas BR
+    start_urls: ["https://www.corridasbr.com.br/default.asp"]
+    allowed_domains: ["www.corridasbr.com.br", "corridasbr.com.br"]
+    listing_patterns: ["/[A-Z]{2}/calendario\\.asp"]
+    detail_patterns: ["/[A-Z]{2}/(?!calendario\\.asp)[^?#]+\\.asp"]
+    render: http
+    max_discovery_pages: 30
+    delay_seconds: 2.0
+
+  - key: ahotu
+    name: Ahotu
+    start_urls: ["https://www.ahotu.com/pt-BR/esporte/corrida"]
+    allowed_domains: ["www.ahotu.com", "ahotu.com"]
+    listing_patterns: ["/pt-BR/calendario/corrida"]
+    detail_patterns: ["/pt-BR/evento/"]
+    render: auto
+    country_filter: Brasil
+    max_discovery_pages: 20
+    delay_seconds: 2.0
+
+  - key: ticketsports
+    name: Ticket Sports
+    start_urls: ["https://www.ticketsports.com.br/calendar/filters"]
+    allowed_domains: ["www.ticketsports.com.br", "ticketsports.com.br"]
+    listing_patterns: ["/calendar"]
+    detail_patterns: ["/(?:e|evento|event)/"]
+    render: auto
+    max_discovery_pages: 20
+    delay_seconds: 2.5
+
+  - key: ativo
+    name: Ativo
+    start_urls: ["https://www.ativo.com/calendario"]
+    allowed_domains: ["www.ativo.com", "ativo.com", "pay.ativo.com"]
+    listing_patterns: ["/calendario", "/eventosrealizados"]
+    detail_patterns: ["/(?:evento|eventos)/", "pay\\.ativo\\.com/"]
+    render: auto
+    max_discovery_pages: 20
+    delay_seconds: 2.5
+
+  - key: minhas_inscricoes
+    name: Minhas Inscrições
+    start_urls: ["https://www.minhasinscricoes.com.br/pt-br/calendario?url=corrida-de-rua"]
+    allowed_domains: ["www.minhasinscricoes.com.br", "minhasinscricoes.com.br"]
+    listing_patterns: ["/pt-br/calendario"]
+    detail_patterns: ["/pt-br/ClickEventos/Redirecionar"]
+    render: auto
+    max_discovery_pages: 20
+    delay_seconds: 2.5
+
+  - key: portal_das_corridas
+    name: Portal das Corridas
+    start_urls: ["https://www.portaldascorridas.com.br/eventos"]
+    allowed_domains: ["www.portaldascorridas.com.br", "portaldascorridas.com.br"]
+    listing_patterns: ["/eventos"]
+    detail_patterns: ["/event-details/"]
+    render: auto
+    max_discovery_pages: 20
+    delay_seconds: 2.0
+
+  - key: corridinhas
+    name: Corridinhas
+    start_urls: ["https://www.corridinhas.com.br/races"]
+    allowed_domains: ["www.corridinhas.com.br", "corridinhas.com.br"]
+    listing_patterns: ["/races(?:\\?.*)?$"]
+    detail_patterns: ["/(?:race|races)/[^/?#]+"]
+    render: auto
+    max_discovery_pages: 30
+    delay_seconds: 2.0
+
+  - key: so_corridas
+    name: Só Corridas
+    start_urls: ["https://socorridas.com.br/corridas/"]
+    allowed_domains: ["socorridas.com.br", "www.socorridas.com.br"]
+    listing_patterns: ["/corridas/(?:$|arquivo/|[^/]+/?)"]
+    detail_patterns: ["/corridas/[^/]+/[^/]+/[^/?#]+/?$"]
+    render: http
+    max_discovery_pages: 60
+    delay_seconds: 2.0
+
+  - key: roadrunners
+    name: Road Runners
+    start_urls:
+      - "https://roadrunners.run/busca/?busca_tipo=eventos&context_uf=BR&rua=true&trail=true&nacional=true&internacional=false&cupom=false"
+      - "https://roadrunners.run/busca/?busca_tipo=resultados"
+    allowed_domains: ["roadrunners.run"]
+    listing_patterns: ["/busca/"]
+    detail_patterns: ["/evento/"]
+    render: auto
+    max_discovery_pages: 50
+    delay_seconds: 2.0
