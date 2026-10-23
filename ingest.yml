@@ -1,0 +1,36 @@
+name: Ingestão diária
+on:
+  workflow_dispatch:
+    inputs:
+      max_event_pages:
+        description: "Máximo de páginas de evento por fonte"
+        default: "100"
+  schedule:
+    - cron: "17 9 * * *"
+permissions:
+  contents: read
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[browser]"
+      - run: playwright install --with-deps chromium
+      - name: Executar ingestão pública
+        env:
+          INGESTION_USER_AGENT: ${{ vars.INGESTION_USER_AGENT }}
+        run: python -m race_ingestion.cli run --all --max-event-pages "${{ inputs.max_event_pages || '100' }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corridas-brasil-${{ github.run_id }}
+          path: |
+            data/bronze/
+            data/silver/
+            data/gold/
+            data/quality/
+          retention-days: 30
